@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+declare const google: any
 
 @Component({
   selector: 'app-register-update-form',
@@ -16,9 +17,9 @@ export class CustomerRegisterEditFormComponent implements OnInit {
       houseNumber: [null, Validators.required],
       zip: ['', Validators.required]
     })
-  })
+  });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
   }
@@ -31,6 +32,20 @@ export class CustomerRegisterEditFormComponent implements OnInit {
   get zip() { return this.customerForm.get('address.zip'); }
 
   onSubmit() {
+    if (this.customerForm.invalid) return;
 
+    const address = `${this.city.value}, ${this.street.value} ${this.houseNumber.value}, ${this.zip.value}`;
+    this.geocodeAddress(address);
+  }
+
+  geocodeAddress(address) {
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: address }, (results, status) => {
+      if (status === "OK") {
+
+      } else {
+
+      }
+    });
   }
 }
