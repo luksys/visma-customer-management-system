@@ -1,1 +1,79 @@
-<p>register-update-form works!</p>
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+  <label>
+    Full Name:
+    <input type="text" formControlName="fullName" required>
+  </label>
+  <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
+       class="alert alert-danger">
+    <div *ngIf="fullName.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="fullName.errors.minlength">
+      Name must be at least 4 characters long.
+    </div>
+  </div>
+
+  <label>
+    Email:
+    <input type="email" formControlName="email" required>
+  </label>
+  <div *ngIf="email.invalid && (email.dirty || email.touched)"
+       class="alert alert-danger">
+    <div *ngIf="email.errors.required">
+      Email is required.
+    </div>
+    <div *ngIf="email.errors.email">
+      Email is not valid.
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <label>
+      City:
+      <input type="text" formControlName="city" required>
+    </label>
+    <div *ngIf="city.invalid && (city.dirty || city.touched)"
+         class="alert alert-danger">
+      <div *ngIf="city.errors.required">
+        City is required.
+      </div>
+    </div>
+
+    <label>
+      Street:
+      <input type="text" formControlName="street" required>
+    </label>
+    <div *ngIf="street.invalid && (street.dirty || street.touched)"
+         class="alert alert-danger">
+      <div *ngIf="street.errors.required">
+        Street is required.
+      </div>
+    </div>
+
+    <label>
+      House Number:
+      <input type="number" formControlName="houseNumber" required>
+    </label>
+    <div *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)"
+         class="alert alert-danger">
+      <div *ngIf="houseNumber.errors.required">
+        House number is required.
+      </div>
+    </div>
+
+    <label>
+      Zip Code:
+      <input type="text" formControlName="zip" required>
+    </label>
+    <div *ngIf="zip.invalid && (zip.dirty || zip.touched)"
+         class="alert alert-danger">
+      <div *ngIf="zip.errors.required">
+        Zip code is required.
+      </div>
+    </div>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
