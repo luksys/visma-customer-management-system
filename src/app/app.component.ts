@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PATH_BASE, PATH_REGISTER_CUSTOMER} from './constants';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'visma-customer-management-system';
+
+  get pathRegisterCustomerConstant() {return PATH_REGISTER_CUSTOMER;}
+  get pathBase() {return PATH_BASE;}
 }

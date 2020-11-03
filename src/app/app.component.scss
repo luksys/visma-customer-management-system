@@ -1,0 +1,23 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+.main-nav {
+  padding: map-get($spacers, 2);
+  width: 100%;
+  background: #000;
+  color: #fff;
+  ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    display: flex;
+
+    li {
+      margin-right: map-get($spacers, 2);
+      a {
+        color: #fff;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

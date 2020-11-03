@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomerService} from "../../services/customer/customer.service";
+import {PATH_REGISTER_CUSTOMER} from "../../constants";
 
 @Component({
   selector: 'app-customers',
@@ -16,6 +17,8 @@ export class CustomersComponent implements OnInit {
   ngOnInit(): void {
     this.customers = this.customersService.getAll();
   }
+
+  get pathRegisterCustomerConstant() {return PATH_REGISTER_CUSTOMER;}
 
   deleteCustomer(id: number) {
     this.customersService.delete(id);

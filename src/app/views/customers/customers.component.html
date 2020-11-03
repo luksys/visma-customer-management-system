@@ -1,21 +1,27 @@
 <h1>Customers</h1>
-<div class="container-fluid">
-  <ul class="row">
-    <li *ngFor="let customer of customers;" class="col-sm-3">
-      <button (click)="deleteCustomer(customer.id)" type="button">Delete</button>
-      <a routerLink="customer/edit/{{customer.id}}">Edit</a>
-      <h2>Profile</h2>
-      <ul>
-        <li>Full Name: {{customer.fullName}}</li>
-        <li>Email: {{customer.email}}</li>
-      </ul>
-      <h3>Address</h3>
-      <ul>
-        <li>City: {{customer.city}}</li>
-        <li>Street: {{customer.street}}</li>
-        <li>House Number: {{customer.houseNumber}}</li>
-        <li>Zip Code: {{customer.zip}}</li>
-      </ul>
-    </li>
-  </ul>
-</div>
+<ul *ngIf="customers!.length; else no_results" class="row list-unstyled">
+  <li *ngFor="let customer of customers;" class="col-sm-3 mb-4">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h2 class="card-title">{{customer.fullName}}</h2>
+        <ul class="list-unstyled mb-3">
+          <li><b>Full Name:</b> {{customer.fullName}}</li>
+          <li><b>Email:</b> {{customer.email}}</li>
+        </ul>
+        <hr>
+        <h3 class="h4">Address</h3>
+        <ul class="list-unstyled">
+          <li><b>City:</b> {{customer.city}}</li>
+          <li><b>Street:</b> {{customer.street}}</li>
+          <li><b>House Number:</b> {{customer.houseNumber}}</li>
+          <li><b>Zip Code:</b> {{customer.zip}}</li>
+        </ul>
+        <div class="mt-4">
+          <button (click)="deleteCustomer(customer.id)" type="button" class="btn btn-danger mr-3">Delete</button>
+          <a routerLink="customer/edit/{{customer.id}}" class="btn btn-primary mr-3">Edit</a>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+<ng-template #no_results>No Results Found. Please click <a [routerLink]="pathRegisterCustomerConstant" class="text-uppercase">here</a> to create first customer.</ng-template>

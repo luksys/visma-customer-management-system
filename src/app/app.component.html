@@ -1,8 +1,17 @@
 <app-notification-bar></app-notification-bar>
-<nav>
+<nav class="main-nav">
   <ul>
-    <li><a [routerLink]="'/'">Home</a></li>
-    <li><a [routerLink]="'customer/register'">Register Customer</a></li>
+    <li><a [routerLink]="pathBase">Home</a></li>
+    <li>|</li>
+    <li><a [routerLink]="pathRegisterCustomerConstant">Register Customer</a></li>
   </ul>
 </nav>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="pt-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
