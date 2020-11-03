@@ -11,6 +11,11 @@ export class CustomerService {
 
   constructor() {
     this.getAll();
+
+    if (this.customers.length) {
+      const customerIds: Array<number> = this.customers.map((customer) => customer.id);
+      this.lastCustomerIdTracker = Math.max(...customerIds);
+    }
   }
 
   get(id: number) {
@@ -31,14 +36,20 @@ export class CustomerService {
    this.lastCustomerIdTracker++;
    customer.id = this.lastCustomerIdTracker;
    this.customers.push(customer);
-   localStorage.setItem(CUSTOMER_LOCAL_STORAGE_KEY, this.customers);
+   this.updateDataStorage();
   }
 
   update(customer) {
-    this.customers.map((customerFromArr) => customerFromArr.id === customer.id ? customer : customerFromArr);
+    this.customers = this.customers.map((customerFromArr) => customerFromArr.id === customer.id ? customer : customerFromArr);
+    this.updateDataStorage();
+  }
+
+  updateDataStorage() {
+    localStorage.setItem(CUSTOMER_LOCAL_STORAGE_KEY, JSON.stringify(this.customers));
   }
 
   delete(id: number) {
-    this.customers.filter((customer) => customer.id !== id);
+    this.customers = this.customers.filter((customer) => customer.id !== id);
+    this.updateDataStorage();
   }
 }

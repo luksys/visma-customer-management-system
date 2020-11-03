@@ -41,7 +41,16 @@ export class CustomerRegisterEditFormComponent implements OnInit {
 
     const address = `${this.city.value}, ${this.street.value} ${this.houseNumber.value}, ${this.zip.value}`;
     this.geocodeService.geocode(address).subscribe((result) => {
-      console.log({result})
+      const customer = {
+        fullName: this.fullName.value,
+        email: this.email.value,
+        city: this.city.value,
+        street: this.street.value,
+        houseNumber: this.houseNumber.value,
+        zip: this.zip.value,
+      }
+
+      this.customerService.add(customer)
     },
     (error) => {
       console.log({error})

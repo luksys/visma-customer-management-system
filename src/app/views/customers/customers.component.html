@@ -1,1 +1,21 @@
-<p>customers works!</p>
+<h1>Customers</h1>
+<div class="container-fluid">
+  <ul class="row">
+    <li *ngFor="let customer of customers;" class="col-sm-3">
+      <button (click)="deleteCustomer(customer.id)" type="button">Delete</button>
+      <a routerLink="customer/edit/{{customer.id}}">Edit</a>
+      <h2>Profile</h2>
+      <ul>
+        <li>Full Name: {{customer.fullName}}</li>
+        <li>Email: {{customer.email}}</li>
+      </ul>
+      <h3>Address</h3>
+      <ul>
+        <li>City: {{customer.city}}</li>
+        <li>Street: {{customer.street}}</li>
+        <li>House Number: {{customer.houseNumber}}</li>
+        <li>Zip Code: {{customer.zip}}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
