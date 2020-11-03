@@ -10,6 +10,7 @@ import { CustomerRegisterEditFormComponent } from './shared/customer-register-ed
 import { CustomersComponent } from './views/customers/customers.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import { NotificationBarComponent } from './shared/notification-bar/notification-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {RouterModule} from "@angular/router";
     CustomerEditComponent,
     Page404Component,
     CustomerRegisterEditFormComponent,
-    CustomersComponent
+    CustomersComponent,
+    NotificationBarComponent
   ],
     imports: [
       BrowserModule,

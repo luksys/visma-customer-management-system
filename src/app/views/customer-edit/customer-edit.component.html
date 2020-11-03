@@ -1,1 +1,5 @@
-<p>update works!</p>
+<h1>Edit a customer</h1>
+<app-register-update-form
+  *ngIf="this.customer"
+  [customer]="this.customer"
+></app-register-update-form>
