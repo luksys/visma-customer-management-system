@@ -13,3 +13,12 @@ app-root {
   padding-bottom: map-get($spacers, 4);
   display: block;
 }
+
+form {
+  .alert {
+    background: transparent;
+    border: none;
+    font-size: $font-size-sm;
+    padding: 0;
+  }
+}

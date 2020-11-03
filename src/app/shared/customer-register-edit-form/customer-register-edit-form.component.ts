@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, NgForm, Validators} from "@angular/forms";
 import {CustomerService} from "../../services/customer/customer.service";
 import {GeocodingService} from "../../services/geocoding/geocoding.service";
 import {CustomerModel} from "../../models/Customer.model";
 import {NotificationBarService} from "../../services/notification-bar/notification-bar.service";
+import {PATH_BASE} from "../../constants";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register-update-form',
@@ -29,7 +31,9 @@ export class CustomerRegisterEditFormComponent implements OnInit {
     private fb: FormBuilder,
     private customerService: CustomerService,
     private geocodeService: GeocodingService,
-    private notificationBarService: NotificationBarService
+    private notificationBarService: NotificationBarService,
+    private router: Router,
+    private zone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -84,11 +88,12 @@ export class CustomerRegisterEditFormComponent implements OnInit {
       } else {
         this.customerService.add(customer);
         this.notificationBarService.addSuccess('Customer has been added successfully.');
-        this.customerForm.reset();
       }
+
+        this.zone.run(() => this.router.navigate([PATH_BASE])).then();
     },
     (error) => {
-      console.log({error})
+      this.notificationBarService.addSuccess('Please enter correct address or contact website administrator.');
     });
   }
 }

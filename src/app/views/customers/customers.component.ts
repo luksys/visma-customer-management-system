@@ -12,7 +12,7 @@ export class CustomersComponent implements OnInit {
 
   constructor(
     private customersService: CustomerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.customers = this.customersService.getAll();

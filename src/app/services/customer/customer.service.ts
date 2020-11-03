@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CustomerModel} from "../../models/Customer.model";
 import {CUSTOMER_LOCAL_STORAGE_KEY} from "../../constants";
+import {NotificationBarService} from "../notification-bar/notification-bar.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class CustomerService {
   public customers;
   public lastCustomerIdTracker = -1;
 
-  constructor() {
+  constructor(
+    private notificationBarService: NotificationBarService
+  ) {
     this.getAll();
 
     if (this.customers.length) {
@@ -38,11 +41,13 @@ export class CustomerService {
    customer.id = this.lastCustomerIdTracker;
    this.customers.push(customer);
    this.updateDataStorage();
+   this.notificationBarService.addSuccess('Customer has been successfully added!');
   }
 
   update(customer) {
     this.customers = this.customers.map((customerFromArr) => customerFromArr.id === customer.id ? customer : customerFromArr);
     this.updateDataStorage();
+    this.notificationBarService.addSuccess('Customer has been successfully updated!');
   }
 
   updateDataStorage() {
@@ -52,5 +57,6 @@ export class CustomerService {
   delete(id: number) {
     this.customers = this.customers.filter((customer) => customer.id !== id);
     this.updateDataStorage();
+    this.notificationBarService.addSuccess('Customer has been successfully deleted!')
   }
 }
