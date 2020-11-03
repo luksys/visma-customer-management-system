@@ -19,7 +19,8 @@ export class CustomerService {
   }
 
   get(id: number) {
-    return this.customers.find((customer) => customer.id === id);
+    const customer = this.customers.find((customer) => customer.id === id);
+    return customer ? customer : {};
   }
 
   getAll() {

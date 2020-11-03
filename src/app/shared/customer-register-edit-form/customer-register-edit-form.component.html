@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+<form *ngIf="!displayError; else error;" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
   <div class="mb-4">
     <label>
       <span class="d-block"><b>Full Name:</b></span>
@@ -83,3 +83,7 @@
 
   <button [disabled]="customerForm.invalid" type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<ng-template #error>
+  <app-page404></app-page404>
+</ng-template>

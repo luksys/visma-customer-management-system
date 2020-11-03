@@ -13,6 +13,7 @@ import {NotificationBarService} from "../../services/notification-bar/notificati
 export class CustomerRegisterEditFormComponent implements OnInit {
   @Input() customer: CustomerModel;
   public isCustomerEdited: boolean = false;
+  public displayError: boolean = false;
   public customerForm = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
@@ -46,16 +47,20 @@ export class CustomerRegisterEditFormComponent implements OnInit {
     if (!customer) return;
 
     this.isCustomerEdited = true;
-    this.customerForm.setValue({
-      fullName: customer.fullName,
-      email: customer.email,
-      address: {
-        city: customer.city,
-        street: customer.street,
-        houseNumber: customer.houseNumber,
-        zip: customer.zip
-      }
-    })
+    if (Object.keys(customer).length > 0) {
+      this.customerForm.setValue({
+        fullName: customer.fullName,
+        email: customer.email,
+        address: {
+          city: customer.city,
+          street: customer.street,
+          houseNumber: customer.houseNumber,
+          zip: customer.zip
+        }
+      })
+    } else {
+      this.displayError = true;
+    }
   }
 
   onSubmit() {
