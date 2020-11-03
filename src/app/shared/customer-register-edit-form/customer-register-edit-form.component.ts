@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-declare const google: any
+import {CustomerService} from "../../services/customer/customer.service";
+import {GeocodingService} from "../../services/geocoding/geocoding.service";
 
 @Component({
   selector: 'app-register-update-form',
@@ -19,7 +20,11 @@ export class CustomerRegisterEditFormComponent implements OnInit {
     })
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService,
+    private geocodeService: GeocodingService,
+  ) {}
 
   ngOnInit(): void {
   }
@@ -35,17 +40,31 @@ export class CustomerRegisterEditFormComponent implements OnInit {
     if (this.customerForm.invalid) return;
 
     const address = `${this.city.value}, ${this.street.value} ${this.houseNumber.value}, ${this.zip.value}`;
-    this.geocodeAddress(address);
-  }
-
-  geocodeAddress(address) {
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: address }, (results, status) => {
-      if (status === "OK") {
-
-      } else {
-
-      }
+    this.geocodeService.geocode(address).subscribe((result) => {
+      console.log({result})
+    },
+    (error) => {
+      console.log({error})
     });
+    // this.geocodeAddress(address);
   }
+
+  // geocodeAddress(address) {
+  //   const geocoder = new google.maps.Geocoder();
+  //   geocoder.geocode({ address: address }, (results, status) => {
+  //     if (status === "OK") {
+  //       const customer = {
+  //         fullName: this.fullName.value,
+  //         email: this.email.value,
+  //         city: this.city.value,
+  //         street: this.street.value,
+  //         houseNumber: this.houseNumber.value,
+  //         zip: this.zip.value
+  //       };
+  //       this.customerService.add(customer);
+  //     } else {
+  //
+  //     }
+  //   });
+  // }
 }
