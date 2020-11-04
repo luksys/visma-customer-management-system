@@ -1,14 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomerRegisterEditFormComponent } from './customer-register-edit-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {GeocodingService} from "../../services/geocoding/geocoding.service";
+import {RouterModule} from "@angular/router";
 
-describe('RegisterUpdateFormComponent', () => {
+let GeocodeServiceMock;
+
+describe('CustomerRegisterEditFormComponent', () => {
   let component: CustomerRegisterEditFormComponent;
   let fixture: ComponentFixture<CustomerRegisterEditFormComponent>;
 
   beforeEach(async () => {
+    GeocodeServiceMock = {};
+
     await TestBed.configureTestingModule({
-      declarations: [ CustomerRegisterEditFormComponent ]
+      declarations: [ CustomerRegisterEditFormComponent ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([])
+      ],
+      providers: [ { provide: GeocodingService, useValue: GeocodeServiceMock } ],
     })
     .compileComponents();
   });

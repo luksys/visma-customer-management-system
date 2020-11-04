@@ -90,7 +90,7 @@ export class CustomerRegisterEditFormComponent implements OnInit {
         this.notificationBarService.addSuccess('Customer has been added successfully.');
       }
 
-        this.zone.run(() => this.router.navigate([PATH_BASE])).then();
+      this.zone.run(() => this.router.navigate([PATH_BASE])).then();
     },
     (error) => {
       this.notificationBarService.addSuccess('Please enter correct address or contact website administrator.');

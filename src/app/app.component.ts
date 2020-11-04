@@ -7,8 +7,6 @@ import {PATH_BASE, PATH_REGISTER_CUSTOMER} from './constants';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'visma-customer-management-system';
-
   get pathRegisterCustomerConstant() {return PATH_REGISTER_CUSTOMER;}
   get pathBase() {return PATH_BASE;}
 }

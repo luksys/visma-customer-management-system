@@ -50,13 +50,13 @@ export class CustomerService {
     this.notificationBarService.addSuccess('Customer has been successfully updated!');
   }
 
-  updateDataStorage() {
-    localStorage.setItem(CUSTOMER_LOCAL_STORAGE_KEY, JSON.stringify(this.customers));
-  }
-
   delete(id: number) {
     this.customers = this.customers.filter((customer) => customer.id !== id);
     this.updateDataStorage();
     this.notificationBarService.addSuccess('Customer has been successfully deleted!')
+  }
+
+  updateDataStorage() {
+    localStorage.setItem(CUSTOMER_LOCAL_STORAGE_KEY, JSON.stringify(this.customers));
   }
 }

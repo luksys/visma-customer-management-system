@@ -19,10 +19,6 @@ export class GeocodingService {
             observer.next(results);
             observer.complete();
           } else {
-            console.log(
-              'Geocoding service: geocode was not successful for the following reason: '
-              + status
-            );
             observer.error(status);
           }
         })
