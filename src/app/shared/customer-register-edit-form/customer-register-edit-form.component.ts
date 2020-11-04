@@ -8,7 +8,7 @@ import {PATH_BASE} from "../../constants";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-register-update-form',
+  selector: 'app-register-edit-form',
   templateUrl: './customer-register-edit-form.component.html',
   styleUrls: ['./customer-register-edit-form.component.scss']
 })
@@ -99,6 +99,8 @@ export class CustomerRegisterEditFormComponent implements OnInit {
         }
 
         this.zone.run(() => this.router.navigate([PATH_BASE])).then();
+      } else {
+        this.notificationBarService.addSuccess('Please enter correct address or contact website administrator.');
       }
     },
     (error) => {

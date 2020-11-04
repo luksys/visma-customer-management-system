@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Content404Component } from './content-404.component';
 
-describe('Page404Component', () => {
+describe('Content404Component', () => {
   let component: Content404Component;
   let fixture: ComponentFixture<Content404Component>;
 
