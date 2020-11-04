@@ -72,28 +72,46 @@ export class CustomerRegisterEditFormComponent implements OnInit {
 
     const address = `${this.city.value}, ${this.street.value} ${this.houseNumber.value}, ${this.zip.value}`;
     this.geocodeService.geocode(address).subscribe((result) => {
-      const customer: CustomerModel = {
-        fullName: this.fullName.value,
-        email: this.email.value,
-        city: this.city.value,
-        street: this.street.value,
-        houseNumber: this.houseNumber.value,
-        zip: this.zip.value,
-      }
+      const addressComponents = result[0].address_components;
 
-      if (this.isCustomerEdited) {
-        customer.id = this.customer.id;
-        this.customerService.update(customer);
-        this.notificationBarService.addSuccess('Customer has been updated successfully.');
-      } else {
-        this.customerService.add(customer);
-        this.notificationBarService.addSuccess('Customer has been added successfully.');
-      }
+      const city = this.getAddressInfo('locality', addressComponents);
+      const zip = this.getAddressInfo('postal_code', addressComponents);
+      const street = this.getAddressInfo('route', addressComponents);
+      const houseNumber = this.getAddressInfo('street_number', addressComponents);
 
-      this.zone.run(() => this.router.navigate([PATH_BASE])).then();
+      if (city && zip && street && houseNumber) {
+        const customer: CustomerModel = {
+          fullName: this.fullName.value,
+          email: this.email.value,
+          city: city,
+          street: street,
+          houseNumber: houseNumber,
+          zip: zip,
+        }
+
+        if (this.isCustomerEdited) {
+          customer.id = this.customer.id;
+          this.customerService.update(customer);
+          this.notificationBarService.addSuccess('Customer has been updated successfully.');
+        } else {
+          this.customerService.add(customer);
+          this.notificationBarService.addSuccess('Customer has been added successfully.');
+        }
+
+        this.zone.run(() => this.router.navigate([PATH_BASE])).then();
+      }
     },
     (error) => {
       this.notificationBarService.addSuccess('Please enter correct address or contact website administrator.');
     });
+  }
+
+  getAddressInfo(key: 'locality' | 'postal_code' | 'route' | 'street_number', addressComponents) {
+    if (!addressComponents) return null;
+
+    const data = addressComponents.find(component => component.types[0] === key);
+
+    if (data) return data.long_name;
+    return null;
   }
 }

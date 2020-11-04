@@ -5,7 +5,7 @@
 >
   <div class="mb-4">
     <label>
-      <span class="d-block"><b>Full Name:</b></span>
+      <span class="d-block"><b>Full Name:*</b></span>
       <input type="text" formControlName="fullName" required>
     </label>
     <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
@@ -20,7 +20,7 @@
     <br />
 
     <label>
-      <span class="d-block"><b>Email:</b></span>
+      <span class="d-block"><b>Email:*</b></span>
       <input type="email" formControlName="email" required>
     </label>
     <div *ngIf="email.invalid && (email.dirty || email.touched)"
@@ -38,7 +38,7 @@
     <h3>Address</h3>
 
     <label>
-      <span class="d-block"><b>City:</b></span>
+      <span class="d-block"><b>City:*</b></span>
       <input type="text" formControlName="city" required>
     </label>
     <div *ngIf="city.invalid && (city.dirty || city.touched)"
@@ -50,7 +50,7 @@
     <br />
 
     <label>
-      <span class="d-block"><b>Street:</b></span>
+      <span class="d-block"><b>Street:*</b></span>
       <input type="text" formControlName="street" required>
     </label>
     <div *ngIf="street.invalid && (street.dirty || street.touched)"
@@ -62,7 +62,7 @@
     <br />
 
     <label>
-      <span class="d-block"><b>House Number:</b></span>
+      <span class="d-block"><b>House Number:*</b></span>
       <input type="number" formControlName="houseNumber" required>
     </label>
     <div *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)"
@@ -74,7 +74,7 @@
     <br />
 
     <label>
-      <span class="d-block"><b>Zip Code:</b></span>
+      <span class="d-block"><b>Zip Code:*</b></span>
       <input type="text" formControlName="zip" required>
     </label>
     <div *ngIf="zip.invalid && (zip.dirty || zip.touched)"
